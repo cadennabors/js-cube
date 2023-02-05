@@ -1,6 +1,8 @@
 var c = document.getElementById("myCanvas");
 var charspeed = 25;
 var charrot = .1;
+//var sinTheta = Math.sin(-.015);
+//var cosTheta = Math.cos(-.015);
 var sinTheta = Math.sin(-.015);
 var cosTheta = Math.cos(-.015);
 var playersin = Math.sin(90);
@@ -122,8 +124,15 @@ function render() {
     //point4
     renderverts[9] * z[3], renderverts[10] * z[3],
   ];
-  //console.log(twodPoints[2]);
-if (twodPoints[1] > 0 || twodPoints[3] > 0) {
+//  console.log("x1" + twodPoints[0]);
+// console.log("y1" + twodPoints[1]);
+// console.log("x2" + twodPoints[2]);
+//  console.log("y2" + twodPoints[3]);
+// console.log("x3" + twodPoints[4]);
+// console.log("y3" + twodPoints[5]);
+//  console.log("x4" + twodPoints[6]);
+//  console.log("y4" + twodPoints[7]);
+if (twodPoints[1] > 0 && twodPoints[3] > 0&&twodPoints[5]&&twodPoints[7]) {
  
 
 ctx.fillRect(twodPoints[0], twodPoints[1], 2, 2);
@@ -158,7 +167,7 @@ drawLine(ctx, twodPoints[6], twodPoints[7], twodPoints[0], twodPoints[1], 'black
     renderverts1[9] * z1[3], renderverts1[10] * z1[3],
   ];
  // console.log(twodPoints1[1])
- if (twodPoints1[1]<0||twodPoints1[3]<0) {
+ if (twodPoints1[1]<0&&twodPoints1[3]<0&&twodPoints1[5]&&twodPoints1[7]) {
  
  
 
