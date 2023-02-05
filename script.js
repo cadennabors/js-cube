@@ -1,6 +1,6 @@
 var c = document.getElementById("myCanvas");
 var charspeed = 25;
-var charrot = 5;
+var charrot = .1;
 var sinTheta = Math.sin(-.015);
 var cosTheta = Math.cos(-.015);
 var playersin = Math.sin(90);
@@ -11,9 +11,55 @@ var sdown = false;
 var ddown = false;
 var jdown = false;
 var ldown = false;
+var playercoor = [0,0,0];
+var playerabs = [0,0,-500];
+var renderverts = [0,0,0,0,0,0,0,0,0,0,0,0]
+var renderverts1 = [0,0,0,0,0,0,0,0,0,0,0,0]
 function renderrot() {
 playersin = Math.sin(playercoor[2]);
 playercos = Math.cos(playercoor[2]);
+renderverts[2] += 500;
+renderverts1[2] += 500;
+renderverts[5] += 500;
+renderverts1[5] += 500;
+renderverts[8] += 500;
+renderverts1[8] += 500;
+renderverts[11] += 500;
+renderverts1[11] += 500;
+var x = renderverts[0];
+var z = renderverts[2];
+
+renderverts[0] = x * playercos + z * playersin;
+renderverts[2] = z * playercos - x * playersin;
+x = renderverts[3];
+z = renderverts[5];
+renderverts[3] = x * playercos + z * playersin;
+renderverts[5] = z * playercos - x * playersin;
+x = renderverts[6];
+z = renderverts[8];
+renderverts[6] = x * playercos + z * playersin;
+renderverts[8] = z * playercos - x * playersin;
+x = renderverts[9];
+z = renderverts[11];
+renderverts[9] = x * playercos + z * playersin;
+renderverts[11] = z * playercos - x * playersin;
+//face2
+x = renderverts1[0];
+z = renderverts1[2];
+renderverts1[0] = x * playercos + z * playersin;
+renderverts1[2] = z * playercos - x * playersin;
+x = renderverts1[3];
+z = renderverts1[5];
+renderverts1[3] = x * playercos + z * playersin;
+renderverts1[5] = z * playercos - x * playersin;
+x = renderverts1[6];
+z = renderverts1[8];
+renderverts1[6] = x * playercos + z * playersin;
+renderverts1[8] = z * playercos - x * playersin;
+x = renderverts1[9];
+z = renderverts1[11];
+renderverts1[9] = x * playercos + z * playersin;
+renderverts1[11] = z * playercos - x * playersin;
 renderverts[2] -= 500;
 renderverts1[2] -= 500;
 renderverts[5] -= 500;
@@ -55,7 +101,7 @@ function render() {
   renderverts1[6] -= playerx
   renderverts[9] -= playerx
   renderverts1[9] -= playerx 
-  //renderrot();
+  renderrot();
   var z = [
     //point1
     350 / (350 + renderverts[2]),
@@ -77,9 +123,9 @@ function render() {
     renderverts[9] * z[3], renderverts[10] * z[3],
   ];
   //console.log(twodPoints[2]);
-if (twodPoints[1] < 0 || twodPoints[3] < 0) {
-  return;
-}
+if (twodPoints[1] > 0 || twodPoints[3] > 0) {
+ 
+
 ctx.fillRect(twodPoints[0], twodPoints[1], 2, 2);
 ctx.fillRect(twodPoints[2], twodPoints[3], 2, 2);
 ctx.fillRect(twodPoints[4], twodPoints[5], 2, 2);
@@ -89,7 +135,7 @@ drawLine(ctx, twodPoints[0], twodPoints[1], twodPoints[2], twodPoints[3], 'black
 drawLine(ctx, twodPoints[2], twodPoints[3], twodPoints[4], twodPoints[5], 'black', 6);
 drawLine(ctx, twodPoints[4], twodPoints[5], twodPoints[6], twodPoints[7], 'black', 6);
 drawLine(ctx, twodPoints[6], twodPoints[7], twodPoints[0], twodPoints[1], 'black', 6);
-
+}
 
   //thing2
   var z1 = [
@@ -112,9 +158,9 @@ drawLine(ctx, twodPoints[6], twodPoints[7], twodPoints[0], twodPoints[1], 'black
     renderverts1[9] * z1[3], renderverts1[10] * z1[3],
   ];
  // console.log(twodPoints1[1])
- if (twodPoints1[1]>0||twodPoints1[3]>0) {
-  return;
- }
+ if (twodPoints1[1]<0||twodPoints1[3]<0) {
+ 
+ 
 
   ctx.fillRect(twodPoints1[0], twodPoints1[1], 2, 2);
   ctx.fillRect(twodPoints1[2], twodPoints1[3], 2, 2);
@@ -125,7 +171,7 @@ drawLine(ctx, twodPoints[6], twodPoints[7], twodPoints[0], twodPoints[1], 'black
   drawLine(ctx, twodPoints1[2], twodPoints1[3], twodPoints1[4], twodPoints1[5], 'black', 6);
   drawLine(ctx, twodPoints1[4], twodPoints1[5], twodPoints1[6], twodPoints1[7], 'black', 6);
   drawLine(ctx, twodPoints1[6], twodPoints1[7], twodPoints1[0], twodPoints1[1], 'black', 6);
-
+ 
 
 
 
@@ -134,6 +180,7 @@ drawLine(ctx, twodPoints[6], twodPoints[7], twodPoints[0], twodPoints[1], 'black
   drawLine(ctx, twodPoints[2], twodPoints[3], twodPoints1[2], twodPoints1[3], 'black', 6);
   drawLine(ctx, twodPoints[4], twodPoints[5], twodPoints1[4], twodPoints1[5], 'black', 6);
   drawLine(ctx, twodPoints[6], twodPoints[7], twodPoints1[6], twodPoints1[7], 'black', 6);
+}
 }
 document.addEventListener('keydown', function (w) {
   if (w.key === 'w') {
@@ -243,7 +290,7 @@ function drawLine(ctx, x1, y1, x2, y2, stroke = 'black', width = 3) {
   ctx.lineWidth = width;
   ctx.stroke();
 };
-var playercoor = [0,0,0];
+
 var renderspacecoor = [0, 0, playercoor[0] + 500]
 var square = [-100, 100, -100,
   100, 100, -100,
@@ -285,7 +332,7 @@ function update() {
   }
   if (jdown == true) {
     //  console.log('hei a')
-    playercoor[2] -= charrot;
+    playercoor[2] += charrot;
    // console.log(playercoor[2]);
    //  console.log("a")
  //  jdown = true;
@@ -293,7 +340,7 @@ function update() {
   }
   if (ldown == true) {
     //console.log('hei w')
-   playercoor[2] += charrot;
+   playercoor[2] -= charrot;
      // console.log(playercoor[2]);
   //   ldown = true;
   }
