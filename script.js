@@ -1,6 +1,6 @@
 var c = document.getElementById("myCanvas");
 var charspeed = 25;
-var charrot = .1;
+var charrot = .05;
 //var sinTheta = Math.sin(-.015);
 //var cosTheta = Math.cos(-.015);
 var sinTheta = Math.sin(-.015);
@@ -132,7 +132,7 @@ function render() {
 // console.log("y3" + twodPoints[5]);
 //  console.log("x4" + twodPoints[6]);
 //  console.log("y4" + twodPoints[7]);
-if (twodPoints[1] > 0 && twodPoints[3] > 0&&twodPoints[5]&&twodPoints[7]) {
+if (twodPoints[1] > 0 && twodPoints[3] > 0&&twodPoints[5]>0&&twodPoints[7]>0) {
  
 
 ctx.fillRect(twodPoints[0], twodPoints[1], 2, 2);
@@ -167,7 +167,7 @@ drawLine(ctx, twodPoints[6], twodPoints[7], twodPoints[0], twodPoints[1], 'black
     renderverts1[9] * z1[3], renderverts1[10] * z1[3],
   ];
  // console.log(twodPoints1[1])
- if (twodPoints1[1]<0&&twodPoints1[3]<0&&twodPoints1[5]&&twodPoints1[7]) {
+ if (twodPoints1[1]<0&&twodPoints1[3]<0&&twodPoints1[5]<0&&twodPoints1[7]<0) {
  
  
 
@@ -315,29 +315,25 @@ square.push(square1[0]);
 square.push(square1[1]);
 function update() {
   if (wdown == true) {
-    //console.log('hei w')
-    playercoor[0] += charspeed;
-   // console.log(playercoor[0]);
-
-  } 
+  let direction = [    playercos,    0,    playersin  ];
+  playercoor[0] += direction[0] * charspeed;
+  playercoor[1] -= direction[2] * charspeed;
+  }
  // console.log(w.key)
   if (sdown == true) {
-    //console.log('hei w')
-    playercoor[0] -= charspeed;
-    //console.log(playercoor[0]);
-   // sdown = true;
+    let direction = [    playercos,    0,    playersin  ];
+    playercoor[0] -= direction[0] * charspeed;
+    playercoor[1] += direction[2] * charspeed;
   }
   if (adown == true) {
-  //  console.log('hei a')
-    playercoor[1] -= charspeed;
-    //console.log(playercoor[1]);
-   // adown = true;
+    let direction = [    playersin,    0,    -playercos  ];
+    playercoor[0] -= direction[0] * charspeed;
+    playercoor[1] += direction[2] * charspeed;
   }
   if (ddown == true) {
-    //console.log('hei w')
-    playercoor[1] += charspeed;
-  //  console.log(playercoor[1]);
-//  ddown = true;
+    let direction = [    playersin,    0,    -playercos  ];
+    playercoor[0] += direction[0] * charspeed;
+    playercoor[1] -= direction[2] * charspeed;
   }
   if (jdown == true) {
     //  console.log('hei a')
