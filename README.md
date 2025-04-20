@@ -1,2 +1,5 @@
 # js-cube
-vanilla js rotating cube renderer. has camera rotation.
+rudimentary vanilla js rotating cube renderer. 
+very old.
+has camera movement + rotation.
+WASD + JL
